@@ -39,27 +39,31 @@ public class CalculatorProcessor {
     }
 
     private Boolean isNumber(String value) {
-        Boolean isNumber = true;
+        Boolean isNumber = false;
         for (Character character : value.toCharArray()) {
-            if (!Character.isDigit(character)) {
-                if (character == '.') {
-                    isNumber = true;
-                } else {
-                    isNumber = false;
-                }
+            if ((Character.isDigit(character)) || (character == '.')) {
+                isNumber = true;
+            } else {
+                isNumber = false;
+                break;
             }
         }
         return isNumber;
     }
 
+
     private Double getValue() {
-        System.out.println("Enter value");
+        return Double.valueOf(validateValue());
+    }
+
+    private String validateValue() {
+        System.out.println("Enter value:");
         String value = userInput.next();
         if (!isNumber(value)) {
-            System.out.println("Please enter valid number");
-            startCalculator();
+            System.out.print("The value is not a valid number. ");
+            return validateValue();
         }
-        return Double.valueOf(value);
+        return value;
     }
 
     private void calculate() {
