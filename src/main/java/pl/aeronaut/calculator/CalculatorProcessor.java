@@ -13,6 +13,18 @@ public class CalculatorProcessor {
     private Scanner userInput = new Scanner(System.in);
     private CalculatorMemory memory = new CalculatorMemory();
 
+    private BinaryOperation binaryOperation;
+
+    public CalculatorProcessor(BinaryOperation binaryOperation) {
+        this.binaryOperation = binaryOperation;
+    }
+
+    public Double executeBinaryOperation(Double a, Double b) {
+        return binaryOperation.doBinaryOperation(a,b);
+    }
+
+//    private MathSymbol mathSymbol = new MathSymbol();
+
     public CalculatorProcessor() {
         calculatorFunctions = new HashMap<>();
         calculatorFunctions.put(1, "add");
@@ -66,9 +78,87 @@ public class CalculatorProcessor {
         return value;
     }
 
+//    private void getInput() {
+//        Double valueA = getValue();
+//        Double valueB;
+//        String operator = userInput.next();
+//        if (mathSymbol.gerBinaryOperationSymbol().contains(operator)) {
+//            valueB = getValue();
+//            calculate();
+//        }
+//
+//    }
+
+//    private Boolean iSBinaryOperator(String operator) {
+//        return (mathSymbol.gerBinaryOperationSymbol().contains(operator));
+//    }
+
+
+//    private void calculate() {
+//        Double valueA = getValue();
+//        Double valueB;
+//        String operator = userInput.next();
+//        if (iSBinaryOperator(operator)) {
+//            valueB = getValue();
+//
+//            switch (operator) {
+//                case "+":
+//                    functions.add(valueA, valueB);
+//                    break;
+//
+//            }
+//            String answer = userInput.next();
+//            switch (operator) {
+//                case "+":
+//                    functions.add(valueA, valueB);
+//                    break;
+//                case "2":
+//                    functions.substract(getValue(), getValue());
+//                    break;
+//                case "3":
+//                    functions.multiply(getValue(), getValue());
+//                    break;
+//                case "4":
+//                    functions.divide(getValue(), getValue());
+//                    break;
+//                case "5":
+//                    functions.calculatePercentage(getValue(), getValue());
+//                    break;
+//                case "6":
+//                    functions.power(getValue());
+//                    break;
+//                case "7":
+//                    functions.squareRoot(getValue());
+//                    break;
+//                case "8":
+//                    functions.divideOneBy(getValue());
+//                    break;
+//                case "9":
+//                    memory.addToMemory(result);
+//                    break;
+//                case "10":
+//                    memory.getFromMemory();
+//                    break;
+//                case "11":
+//                    memory.clearMemory();
+//                    break;
+//                default:
+//                    System.out.println("Wrong command");
+//            }
+//            startCalculator();
+//        }
+//    }
+
     private void calculate() {
+        Double value = getValue();
         String answer = userInput.next();
         switch (answer) {
+
+            case "+":
+                CalculatorProcessor calculatorProcessor = new CalculatorProcessor(new AddOperation());
+                calculatorProcessor.binaryOperation.doBinaryOperation(value, getValue());
+
+
             case "1":
                 functions.add(getValue(), getValue());
                 break;
@@ -109,3 +199,4 @@ public class CalculatorProcessor {
     }
 
 }
+
